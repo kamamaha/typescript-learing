@@ -1,27 +1,12 @@
-const input1Element: HTMLInputElement = document.querySelector("#input1")
-const input2Element: HTMLInputElement = document.querySelector("#input2")
-const addButtonElement = document.querySelector("button")
+const buttonElement = document.querySelector("button")
 
-const add = (v1: number, v2: number) => v1 + v2;
-
-addButtonElement.addEventListener("click", () => {
-    const sum = add(Number(input1Element.value), Number(input2Element.value))
-    console.log(sum)
-})
-
-const LogAge = (age: number | string) => {
-    return(
-        console.log(`hej mam ${age} lat`)
-    )
-    
+const calculatePrice = (originalPrice: number, hasDiscount: boolean) => {
+    return hasDiscount ? originalPrice * 0.8 : originalPrice
 }
 
-LogAge(30)
-LogAge("dwa")
+buttonElement.addEventListener("click", () => {
+    const originalPrice: number = 50;
+    const hasDiscount: boolean = new URLSearchParams(window.location.search).get("discount") === "true"
 
-let test: number | string | boolean | []
-
-test = "test"
-test = 2
-test = true
-test = []
+    console.log(calculatePrice(originalPrice, hasDiscount))
+})
