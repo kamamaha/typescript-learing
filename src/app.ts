@@ -6,20 +6,27 @@ const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 
 interface Task {
     title: string;
-    done: boolean
+    done: boolean;
+    category?: "general" | "work" | "gym" | "hobby" //literal type + union type
 }
+
+const categories: string[] = ["general", "work", "gym", "hobby"];
+
 const tasks: Task[] = [
   {
     title: "Wyrzucić śmieci",
     done: false,
+    category: "general"
   },
   {
     title: "Pójść do sklepu",
     done: true,
+    category: "gym"
   },
   {
     title: "Nakarmić psa",
     done: false,
+    category: "work"
   },
 ];
 
@@ -28,6 +35,10 @@ const render = () => {
   tasks.forEach((task, index) => {
 
     const taskElement: HTMLElement = document.createElement("li");
+    if(task.category){
+      taskElement.classList.add(task.category)
+    }
+    
     const id: string = `task-${index}`;
     const labelElement: HTMLLabelElement = document.createElement("label");
     labelElement.innerText = task.title;
@@ -59,6 +70,6 @@ addButtonElement.addEventListener("click", (event: Event) => {
   render();
 });
 
-addTask({title: "spacjalne zadanie od szefa", done: true})
+addTask({title: "zrobić klate", done: false, category: "gym"})
 
 render();
